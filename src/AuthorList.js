@@ -4,23 +4,23 @@ import React, { Component } from "react";
 import AuthorCard from "./AuthorCard";
 import SearchBar from "./SearchBar";
 
-class AuthorsList extends Component {
+class AuthorList extends Component {
   state = {
     filteredAuthors: this.props.authors
   };
 
-  filterAuthors = query => {
+  filteredAuthors = query => {
     query = query.toLowerCase();
     let filteredAuthors = this.props.authors.filter(author =>
       `${author.first_name} ${author.last_name}`.toLowerCase().includes(query)
     );
-    this.setState({ filteredAuthors: filteredAuthors });
+    this.setState({ filteredAuthors });
   };
 
   render() {
-    const authorCards = this.state.filteredAuthors.map(author => (
-      <AuthorCard key={author.id} author={author} />
-    ));
+    const authorCards = this.state.filteredAuthors.map(author =>( 
+      <AuthorCard key={author.first_name + author.last_name} author={author}/>)
+    );
 
     return (
       <div>
@@ -32,4 +32,4 @@ class AuthorsList extends Component {
   }
 }
 
-export default AuthorsList;
+export default AuthorList;
